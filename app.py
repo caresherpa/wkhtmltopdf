@@ -28,7 +28,7 @@ def application(request):
     request_is_json = request.content_type.endswith('json')
 
     with tempfile.NamedTemporaryFile(suffix='.html') as source_file:
-        options={}
+        options = {}
         if request_is_json:
             # If a JSON payload is there, all data is in the payload
             payload = json.loads(request.data)
@@ -44,6 +44,19 @@ def application(request):
 
         # Evaluate argument to run with subprocess
         args = ['/usr/bin/xvfb-run', 'wkhtmltopdf']
+
+        #add default options
+        if options is None:
+            options = {
+                    'page-size': 'A4',
+                    'margin-top': '0.50in',
+                    'margin-right': '0.50in',
+                    'margin-bottom': '0.50in',
+                    'margin-left': '0.50in',
+                    'encoding': "UTF-8",
+                    'footer-right': '[page]',
+                    '--enable-local-file-access': ''
+                    }
 
         # Add Global Options
         if options:
