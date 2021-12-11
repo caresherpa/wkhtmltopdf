@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER chin@oberon.nl
+LABEL MAINTAINER="brett@caresherpa.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
