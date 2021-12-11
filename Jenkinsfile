@@ -8,7 +8,9 @@ node {
       if(env.BRANCH_NAME == 'master'){
         docker.build("wkhtmltopdf","--build-arg BUILD_ID=1.0.${BUILD_ID} -f Dockerfile .")
         sh 'docker tag wkhtmltopdf localhost:15000/wkhtmltopdf:latest'
-        sh 'docker push localhost:15000/wkhtmltopdf'
+        sh 'docker tag wkhtmltopdf localhost:15000/wkhtmltopdf:12.5.1'
+        sh 'docker push localhost:15000/wkhtmltopdf:latest'
+        sh 'docker push localhost:15000/wkhtmltopdf:12.5.1'
         sh 'docker rmi -f wkhtmltopdf localhost:15000/wkhtmltopdf'
       }
     }
